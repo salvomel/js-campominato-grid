@@ -38,7 +38,6 @@ function startGame() {
     }
 }
 
-
 // _____________
 // | FUNCTIONS |
 
