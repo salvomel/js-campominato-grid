@@ -10,8 +10,15 @@ document.getElementById('play').addEventListener('click', startGame);
 function startGame() {
 
     // CREO LA GRIGLIA CON GLI SQUARE
-    // Array di numeri da 1 a 100
-    const numberOfSquares = 100;
+    // Array di numeri in base al livello
+    let numberOfSquares;
+    if (document.getElementById('dropdown').value == 'easy') {
+        numberOfSquares = 100;
+    } else if (document.getElementById('dropdown').value == 'medium') {
+        numberOfSquares = 81; 
+    } else if (document.getElementById('dropdown').value == 'hard') {
+        numberOfSquares = 49;
+    }
     
     // Richiamo funzione Genera Numeri nell Griglia
     let generatedNumbers = generateGridNumbers(numberOfSquares);
@@ -48,7 +55,7 @@ function startGame() {
 function generateGridNumbers (quantityOfNumbers) {
     const numbersArray = [];
 
-    for ( let i= 1; i < quantityOfNumbers + 1; i++) {
+    for ( let i= 1; i <= quantityOfNumbers; i++) {
          numbersArray.push(i);
     }
     return numbersArray;
@@ -61,7 +68,19 @@ function generateGridNumbers (quantityOfNumbers) {
 function generateGridItem(number) {
     const newSquare = document.createElement('div');
     newSquare.classList.add('square');
-    newSquare.innerHTML = `<span>${number}</span>`; 
+    newSquare.innerHTML = `<span>${number}</span>`;
+
+    // If per squares in base ai livelli
+    if (document.getElementById('dropdown').value == 'easy') {
+        newSquare.style.width = 'calc(100% / 10)';
+        newSquare.style.height = 'calc(100% / 10)';
+    } else if (document.getElementById('dropdown').value == 'medium') {
+        newSquare.style.width = 'calc(100% / 9)';
+        newSquare.style.height = 'calc(100% / 9)';
+    } else if (document.getElementById('dropdown').value == 'hard') {
+        newSquare.style.width = 'calc(100% / 7)';
+        newSquare.style.height = 'calc(100% / 7)';
+    }
 
     return newSquare;
 }
