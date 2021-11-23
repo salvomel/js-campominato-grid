@@ -32,10 +32,12 @@ header {
 
 .dropbtn {
     padding: 2px 30px;
+    cursor: pointer;
 }
 
 #play {
     padding: 2px 30px;
+    cursor: pointer;
 }
 
 /* MAIN */
@@ -66,12 +68,7 @@ main {
     align-items: center;
 }
 
-.square span {
-    display: none;
-}
-
-.square.active span {
-    display: block;
+.square.active {
     background-color: #6495ed;
     color: white;
 }
