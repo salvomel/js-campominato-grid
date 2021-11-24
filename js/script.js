@@ -11,13 +11,17 @@ function startGame() {
 
     // CREO LA GRIGLIA CON GLI SQUARE
     // Array di numeri in base al livello
+    const level = document.getElementById('dropdown').value;
     let numberOfSquares;
-    if (document.getElementById('dropdown').value == 'easy') {
+    if (level == 'easy') {
         numberOfSquares = 100;
-    } else if (document.getElementById('dropdown').value == 'medium') {
+        gridDimension = 10;
+    } else if (level == 'medium') {
         numberOfSquares = 81; 
-    } else if (document.getElementById('dropdown').value == 'hard') {
+        gridDimension = 9;
+    } else if (level == 'hard') {
         numberOfSquares = 49;
+        gridDimension = 7;
     }
     
     // Richiamo funzione Genera Numeri nell Griglia
@@ -30,7 +34,7 @@ function startGame() {
     for(let i = 0; i < generatedNumbers.length; i++) {
         
         const thisNumber = generatedNumbers[i];
-        const newSquare = generateGridItem(thisNumber);
+        const newSquare = generateGridItem(thisNumber, gridDimension);
     
         // Evento CLICK
         newSquare.addEventListener('click', squareClick);
@@ -64,23 +68,16 @@ function generateGridNumbers (quantityOfNumbers) {
 // Funzione crea un elemento della griglia
 
 // number: numero da inserire nello square
+// cellDimension: numero di celle per riga
 // return: Torna l'elemento html creato
-function generateGridItem(number) {
+function generateGridItem(number, cellDimension) {
     const newSquare = document.createElement('div');
     newSquare.classList.add('square');
     newSquare.innerHTML = `<span>${number}</span>`;
 
-    // If per squares in base ai livelli
-    if (document.getElementById('dropdown').value == 'easy') {
-        newSquare.style.width = 'calc(100% / 10)';
-        newSquare.style.height = 'calc(100% / 10)';
-    } else if (document.getElementById('dropdown').value == 'medium') {
-        newSquare.style.width = 'calc(100% / 9)';
-        newSquare.style.height = 'calc(100% / 9)';
-    } else if (document.getElementById('dropdown').value == 'hard') {
-        newSquare.style.width = 'calc(100% / 7)';
-        newSquare.style.height = 'calc(100% / 7)';
-    }
+    // Numero squares in base ai livelli
+    newSquare.style.width = `calc(100% / ${cellDimension})`;
+    newSquare.style.height = `calc(100% / ${cellDimension})`;
 
     return newSquare;
 }
